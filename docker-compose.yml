@@ -1,31 +1,16 @@
-version: "3"
+version: '3.3'
 services:
-    mongo-express:
-        image: mongo-express
-        ports:
-            - 8081:8081
+    db:
+        image: mysql:5.7
+        restart: always
         environment:
-            ME_CONFIG_BASICAUTH_USERNAME: home
-            ME_CONFIG_BASICAUTH_PASSWORD: home
-            ME_CONFIG_MONGODB_PORT: 27017
-            ME_CONFIG_MONGODB_ADMINUSERNAME: home
-            ME_CONFIG_MONGODB_ADMINPASSWORD: home
-        links:
-            - mongo
-        networks:
-            - mongo-compose-network
-    mongo:
-        image: mongo
+            MYSQL_DATABASE: home_project
+            MYSQL_USER: home
+            MYSQL_PASSWORD: home
+            MYSQL_ROOT_PASSWORD: home
         ports:
-            - 27017:27017
-        environment:
-            MONGO_INITDB_ROOT_USERNAME: home
-            MONGO_INITDB_ROOT_PASSWORD: home
+            - 3306:3306
         volumes:
-            - /home/$USER/workspace/
-        networks:
-            - mongo-compose-network
-
-networks:
-    mongo-compose-network:
-        driver: bridge
+            - my-db:/var/lib/mysql
+volumes:
+    my-db:

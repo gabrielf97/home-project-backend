@@ -4,11 +4,12 @@ server:
 spring:
   application:
     name: home-project
-  data:
-    mongodb:
-      authentication-database: admin
-      username: home
-      password: home
-      database: home-project
-      port: 27017
-      host: localhost
+  datasource:
+    url: jdbc:mysql://localhost:3306/home_project
+    username: home
+    password: home
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      show-sql: true

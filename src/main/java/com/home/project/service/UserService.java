@@ -5,7 +5,7 @@ import com.home.project.model.user.dto.UserDTO;
 
 public interface UserService {
 
-    User createUser(final UserDTO userDTO);
+    User create(final UserDTO userDTO);
 
-    void deleteUser(final UserDTO userDTO);
+    void delete(final UserDTO userDTO);
 }

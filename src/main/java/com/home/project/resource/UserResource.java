@@ -8,10 +8,11 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 @RequiredArgsConstructor
 @Slf4j
 public class UserResource {
@@ -19,15 +20,15 @@ public class UserResource {
     private final UserService userService;
 
     @PostMapping
-    public HttpEntity<?> createUser(@RequestBody UserDTO userDTO) {
+    public HttpEntity<?> createUser(@Valid @RequestBody UserDTO userDTO) {
         log.info("M=createUser, recebendo usário={}", userDTO);
-        return ResponseEntity.created(URI.create("/user"+userService.createUser(userDTO).getId())).build();
+        return ResponseEntity.created(URI.create("/user"+userService.create(userDTO).getId())).build();
     }
 
     @DeleteMapping
-    public HttpEntity<?> deleteUser(@RequestBody UserDTO userDTO) {
+    public HttpEntity<?> deleteUser(@Valid @RequestBody UserDTO userDTO) {
         log.info("M=deleteUser, recebendo usário={}", userDTO);
-        userService.deleteUser(userDTO);
+        userService.delete(userDTO);
         return ResponseEntity.ok().build();
     }
 }

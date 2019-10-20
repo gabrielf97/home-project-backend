@@ -1,37 +1,31 @@
 package com.home.project.model.user;
 
+import com.home.project.model.Audit;
 import com.home.project.model.user.dto.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import javax.persistence.*;
 
-@Document
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User {
+@Entity
+public class User extends Audit {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
 
+    @Column(name = "user_name")
     private String userName;
 
     private String password;
 
     private Boolean active;
-
-    private Date dateCreate;
-
-    private Date dateUpdate;
-
-    private void prePersist() {
-    }
 
     public UserDTO toUserDTO() {
         return UserDTO.builder()

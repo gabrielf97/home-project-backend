@@ -1,6 +1,0 @@
-spring:
-  data:
-    mongodb:
-      database: embeded_db
-      port: 27017
-      host: localhost
